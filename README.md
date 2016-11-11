@@ -1,2 +1,9 @@
 # ProjectPrometheus
-First project repo, group members: Ryan, Niraj, Frankie, Laura
+## First Project Repo
+### Group members:
+  * Ryan
+  * Niraj
+  * Frankie
+  * Laura
+___
+
