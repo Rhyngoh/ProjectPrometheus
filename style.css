@@ -1,0 +1,12 @@
+body { 
+	border-radius: 10px;
+	padding-top: 20px;
+	background-image: url("images/chicago.jpg");
+    background-size: 120%
+}
+
+.navbar {
+	font: solid bold;
+	color: black;
+	float: center;
+}
