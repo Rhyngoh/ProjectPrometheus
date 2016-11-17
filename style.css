@@ -1,8 +1,9 @@
 body { 
-	border-radius: 10px;
-	padding-top: 20px;
-	background-image: url("images/chicago.jpg");
-    background-size: 120%
+	background: url("images/chicago.jpg") no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 h2 {
@@ -12,12 +13,39 @@ h2 {
 	font-family: 'Oleo Script Swash Caps', cursive;
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
-    text-decoration: none;
-    color: red; /*Change rollover cell color here*/
+/* Rules for screen widths at 768px or lower */
+@media screen and (max-width: 768px) {
+
+    body {
+        background-color: #333;
+    }
+
+    .wrapper {
+        width: 600px;
+    }
 }
 
+@media screen and (max-width: 634px) {
 
+	body {
+    background-color: #ffffff ;
+	}
 
+	.wrapper {
+   		width:515;
+	}	
+		
+body {
+	background: #ccc;
+	font-size: 13px;
+	line-height: 20px;
+}
+.wrapper {
+	width: 600px;
+	margin: 20px auto;
+}
+
+footer {
+
+}
 
