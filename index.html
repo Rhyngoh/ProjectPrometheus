@@ -17,6 +17,9 @@
 	<!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Firebase -->
+	<!--<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>-->
 </head>
 <body>
 <div id="wrap">
@@ -39,31 +42,184 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<div id="mapContainer">
-					<iframe
-					  width="1000"
-					  height="600"
-					  frameborder="0" style="border:0"
-					  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCTdAHDFgylm2HfbLYX93tWJ_zesUk03mI
-					    &center=30.2870079,-97.7312834&zoom=15" allowfullscreen>
-					</iframe>
-				</div>
+				<div id="map"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="yelpSearchResults">
+                        </div>
+                    </div>
+                </div>
 			</div>
 			<div class="col-md-4">
-				<div id="legendContainer">
-					<div class="panel panel-primary">
-				      <div class="panel-heading">Legend and stuff</div>
-				      <div class="panel-body">Maybe tick boxes? </div>
-				    </div>
-				</div>
-			</div>
-		</div>
-	</div>
+				<div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
+                            </span>Nearby Restaurants</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><form id="search-form">
+                                            <label for="byNameInput">Search by Name:</label><br>
+                                            <input type="text" id="searchByName" name="findingSearch" class="form-control">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><form id="number-form">
+                                            <label for="byNumberInput">Number of locations to retrieve:</label><br>
+                                            <input type="number" id="numRecords" name="numberSearch" class="form-control">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-file text-info"></span><form id="rating-form">
+                                            <label for="byRatingInput">Minimum rating</label><br>
+                                            <input type="number" id="yelpRating" name="ratingSearch" claas="form-control">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-file text-info"></span><form id="city-form">
+                                            <label for="byCityInput">Around which city</label><br>
+                                            <input type="text" id="searchByCity" name="citySearch" claas="form-control">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><input id="findSearch" type="submit" value="Search">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
+                            </span>Modules</a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
+                            </span>Account</a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Change Password</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Notifications</a> <span class="label label-info">5</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Import/Export</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
+                                            Delete Account</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
+                            </span>Reports</a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+			    </div>
+		    </div>
+    	</div>
+    </div>
 </div>
 	<div id="footer">
 		<div class="container text-center">
 			<p class="text-muted credit" style="color:#fff">Made in Austin with love</p>
 		</div>
 	</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4&callback=initMap"
+  async defer>
+</script>       
+<script src="assets/javascript/javascript.js"></script>
+
 </body>
 </html>

@@ -19,3 +19,9 @@ html, body {
     font-size: 12px;
     margin-top: 20px;
 }
+#map{
+    height: 600px;
+    width: 1000px;
+    frameborder: 0;
+    border:0;
+}
