@@ -5,8 +5,19 @@ body {
     background-size: 120%
 }
 
-.navbar {
+h2 {
+	font-size: 70px;
+	color: #fff;
 	font: solid bold;
-	color: black;
-	float: center;
+	font-family: 'Oleo Script Swash Caps', cursive;
 }
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    text-decoration: none;
+    color: red; /*Change rollover cell color here*/
+}
+
+
+
+
