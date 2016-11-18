@@ -73,7 +73,8 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-eye-open"></span><a href="#"> Home Search</a> 
+                                        <a href="#"><p id="homeSearch"><span class="glyphicon glyphicon-eye-open"></span> Home Search</p></a> 
+                                        <form id='city-form'><label for='byCityInput'>Enter the Address</label><br><input type='text' id='searchByZip' name='zipSearch' class='form-control'></form><br><input id='findZip' type='submit' value='Search'>
                                     </td>
                                 </tr>
                                 <tr>
@@ -127,10 +128,10 @@
                                 <label for="byRatingInput">Radius of Search (in meters)</label><br>
                                 <input type="number" id="searchRadius" name="ratingSearch" claas="form-control">
                             </form>
-                            <form id="city-form">
+                            <!--<form id="city-form">
                                 <label for="byCityInput">Enter the zip code</label><br>
                                 <input type="text" id="searchByCity" name="citySearch" claas="form-control">
-                            </form>
+                            </form>-->
                             <br>
                             <input id="findSearch" type="submit" value="Search">
                         </div>
@@ -213,9 +214,9 @@
         </div>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4&callback=initMap"
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4&callback=initMap"
   async defer>
-</script>       
+</script>  -->     
 <script src="assets/javascript/javascript.js"></script>
 </body>
 </html>

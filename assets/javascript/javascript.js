@@ -34,7 +34,7 @@ var map;
 var searchResults = "";
 var searchNumber = 10;
 var searchRadius = 1000;
-var zipCode = "";
+var zipCode;
 //var searchRating = 4;
 var searchCity = "";
 //var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
@@ -62,6 +62,8 @@ var restaurantArray = [
 	["Lounge" , "4bf58dd8d48988d121941735"],
 	["Nightclub" , "4bf58dd8d48988d11f941735"]
 ];
+var latArray = [];
+var longArray = [];
 //=======================//
 //=======Methods=========//
 //=======================//
@@ -78,9 +80,13 @@ function initMap() {
 	});
 }
 $("#findSearch").on("click", function(){
-	zipCode = $("#searchByCity").val().trim();
-	queryURL = foursquareQueryURL + zipCode;
-	console.log(queryURL);
+	latArray = [];
+	longArray = [];
+	if (zipCode){
+		storeTheZip();
+	} else {
+		queryURL = foursquareQueryURL + "78705";
+	}
 	searchResults = $("#sel1").val();
 	var convertedSearch = encodeURIComponent(searchResults);
 	console.log(convertedSearch);
@@ -103,11 +109,11 @@ $("#findSearch").on("click", function(){
 		queryURL = queryURL + "&radius=5000";
 		console.log(queryURL);
 	}
-
 	$("#foursquareResults").html("");
 	locationCounter = 0;
 	runQuery(searchNumber, queryURL);
 	console.log(queryURL);
+	//changeTheMap();
 	return false;
 });
 function runQuery(searchNumber, queryURL){
@@ -133,59 +139,65 @@ function runQuery(searchNumber, queryURL){
 				if(response.response.groups[0].items[i].venue.url){
 					$("#foursqSearch-" + locationCounter).append("<h5><a href='" + response.response.groups[0].items[i].venue.url + "'>" + response.response.groups[0].items[i].venue.url + "</a></h5>");
 				}
-
+				latArray.push(response.response.groups[0].items[i].venue.location.lat);
+				longArray.push(response.response.groups[0].items[i].venue.location.lng);
 			}
+			console.log(latArray);
+			console.log(longArray);
 		});
 }
-$(document).ready(function() {
-	$("#ourMission").on("click", function(){
-		$("#map").html("<p>Our mission is to provide</p>");
-	});
-	//on click search button for first accordion, do function
-	/*function yelpCall(){
-		var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
-		$.ajax({url: yelpQueryURL, method: "GET"}).done(function(response){
-			console.log(response);
+function storeTheZip(){
+	zipCode = $("#searchByZip").val().trim();
+	queryURL = foursquareQueryURL + zipCode;
+	console.log(queryURL);
+	//init map here
+	var js_file = document.createElement('script');
+	js_file.type = 'text/javascript';
+	js_file.src = 'https://maps.googleapis.com/maps/api/js?callback=initMap&key=' + gMapsJSAPI;
+	document.getElementsByTagName('head')[0].appendChild(js_file);
+	return false;
+}
+
+$(document).on("click", "#findZip", storeTheZip);
+
+$("#ourMission").on("click", function(){
+	$("#map").html("<p>Our mission is to provide</p>");
+});
+
+function changeTheMap(){
+	var infowindow = new google.maps.InfoWindow();
+	var marker;
+	for (var j = 0; j < searchNumber;j++){
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(latArray[j], longArray[j]),
+			map: map
 		});
+		google.maps.event.addListener(marker, "click", (function(marker, j) {
+			return function(){
+				infowindow.setContent(testLocations[j].name);
+				infowindow.open(map, marker);
+			}
+		})(marker, j));
 	}
-	yelpCall();*/
-	
-}); 
-/*
-var testLocations = [
-	songla = {
-		name: "Song La",
-		address: "411 W 23rd St",
-		lat: "30.2861",
-		long: "-97.7425",
-		city: "austin"
-	},
-	chipotle = {
-		name: "Chipotle",
-		address: "2230 Guadalupe St",
-		lat: "30.2857",
-		long: "-97.8123",
-		city: "austin"
-	},
-	torchys = {
-		name: "Torchys Tacos",
-		address: "2801 Guadalupe St",
-		lat: "30.2938",
-		long: "-97.8120",
-		city: "austin"
-	}
-]
-var infowindow = new google.maps.InfoWindow();
-var marker;
-for (var i = 0; i < testLocations.length;i++){
-	marker = new google.maps.Marker({
-		position: new google.maps.LatLng(testLocations[i].lat, testLocations[i].long),
-		map: map
-	});
-	google.maps.event.addListener(marker, "click", (function(marker, i) {
-		return function(){
-			infowindow.setContent(testLocations[i].name);
-			infowindow.open(map, marker);
-		}
-	})(marker, i));
-}*/
+}
+
+$("#enter").on("click", function() {  
+    //read value from form
+    var location = $("#location").val();
+    var searchFor = $("#searchFor").val();
+    //check results
+    console.log("loc: "+ location + " search: "+ searchFor);
+ 
+var queryGeoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=" + myKey
+console.log(queryGeoURL)
+
+$.ajax({url: queryGeoURL, method: 'GET'})
+      //create object
+      .done(function(geoResponse) {
+
+console.log(geoResponse)
+
+var lat = geoResponse.results[0].geometry.location.lat;
+var lng = geoResponse.results[0].geometry.location.lng;
+
+console.log(lat+","+lng);
