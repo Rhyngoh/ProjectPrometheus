@@ -27,7 +27,7 @@ var zillowAPI = "X1-ZWz19hcd8pk64r_5i268";
 //foursquare client id
 var foursquareClient = "Z52OIOVPKTHUNPPYWRTVYA0BKBA30MD1PNQ1AG2QAKVI4JIB";
 var foursquareSecret = "GY1LWAXZWEUOS1KNUQSHYSR4JQBV4XY4HH0PQN0ULMPTD5GH";
-var foursquareQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + foursquareClient + "&client_secret=" + foursquareSecret + "&v=20161117&near=";
+var foursquareQueryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + foursquareClient + "&client_secret=" + foursquareSecret + "&v=20161117&near=";
 //Initial Google Maps load
 var map;
 //Yelp variables
@@ -38,7 +38,7 @@ var zipCode = "";
 //var searchRating = 4;
 var searchCity = "";
 //var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
-var yelpQueryURL = "https://api.yelp.com/v2/search/?key=" + yelpAPI + "&sort=1&term=";
+//var yelpQueryURL = "https://api.yelp.com/v2/search/?key=" + yelpAPI + "&sort=1&term=";
 var locationCounter = 0;
 var restaurantArray = [
 	["Burger Joint", "4bf58dd8d48988d16c941735"],
@@ -82,38 +82,61 @@ $("#findSearch").on("click", function(){
 	queryURL = foursquareQueryURL + zipCode;
 	console.log(queryURL);
 	searchResults = $("#sel1").val();
-	// convert searchResults into something to compare to the restaurantObjects to grab the id
-	// queryURL = queryURL + "&categoryId=" + idnumber;
-	var restID = restaurantArray.indexOf(searchResults);
-	console.log(restID);
+	var convertedSearch = encodeURIComponent(searchResults);
+	console.log(convertedSearch);
+	queryURL = queryURL + "&query=" + convertedSearch;
+	console.log(queryURL);
 	searchNumber = $("#numRecords").val();
 	searchRadius = $("#searchRadius").val();
 	if (parseInt(searchNumber)){
+		queryURL = queryURL + "&limit=" + searchNumber;
+		console.log(queryURL);
+	} else{
+		searchNumber = 10;
 		queryURL = queryURL + "&limit=" + searchNumber;
 		console.log(queryURL);
 	}
 	if (parseInt(searchRadius)){
 		queryURL = queryURL + "&radius=" + searchRadius;
 		console.log(queryURL);
+	} else{
+		queryURL = queryURL + "&radius=5000";
+		console.log(queryURL);
 	}
-	//runQuery(searchNumber, queryURL);
+
+	$("#foursquareResults").html("");
+	locationCounter = 0;
+	runQuery(searchNumber, queryURL);
 	console.log(queryURL);
 	return false;
 });
-/*function runQuery(numLocations, queryURL){
+function runQuery(searchNumber, queryURL){
 	$.ajax({url: queryURL, method: "GET"})
-		.done(function(yelpData) {
-			console.log(yelpData);
-			for (var i = 0; i < numLocations; i++){
+		.done(function(response) {
+			console.log(response);
+			console.log(response.response.groups[0].items[0].venue.location.address);
+			for (var i = 0; i < searchNumber; i++){
 				locationCounter++;
-				var yelpSearchResults = $("<div>");
-				yelpSearchResults.addClass("yelpSearch");
-				yelpSearchResults.attr("id", "yelpSearch-" + locationCounter);
-				$("#yelpSearchResults").append(yelpSearchResults);
+				var foursquareResults = $("<div>");
+				foursquareResults.addClass("foursqSearch");
+				foursquareResults.attr("id", "foursqSearch-" + locationCounter);
+				$("#foursquareResults").append(foursquareResults);
+				if(response.response.groups[0].items[i].venue.name != "null"){
+					$("#foursqSearch-" + locationCounter).append("<h3 class='restaurantName'><span class='label label-primary'>" + locationCounter + "</span><strong>	" + response.response.groups[0].items[i].venue.name + '</strong></h3>');
+				}
+				if(response.response.groups[0].items[i].venue.location.address){
+					$("#foursqSearch-" + locationCounter).append("<h4>" + response.response.groups[0].items[i].venue.location.address + "</h4>");
+				}
+				if(response.response.groups[0].items[i].venue.contact.formattedPhone){
+					$("#foursqSearch-" + locationCounter).append("<h5>" + response.response.groups[0].items[i].venue.contact.formattedPhone + "</h5>");
+				}
+				if(response.response.groups[0].items[i].venue.url){
+					$("#foursqSearch-" + locationCounter).append("<h5><a href='" + response.response.groups[0].items[i].venue.url + "'>" + response.response.groups[0].items[i].venue.url + "</a></h5>");
+				}
 
 			}
-		})
-}*/
+		});
+}
 $(document).ready(function() {
 	//on click search button for first accordion, do function
 	/*function yelpCall(){
