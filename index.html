@@ -3,13 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<h2 align="center">Project Prometheus</h2>
+	<title>Project Prometheus</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps" rel="stylesheet">
 
 	<!-- Style -->
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 
 	<!-- Viewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,33 +19,18 @@
 	<!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<div id="wrap">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar" id="navbarMain">
-				  <div class="container-fluid">
-				    <ul class="nav navbar-nav navbar-right">
-			            <li class="active"><a id="navhoverover" href="#">Search<span class="sr-only">(current)</span></a></li>
-			            <li><a id="navhoverover" href="#">About</a></li>
-			            <li><a id="navhoverover" href="#">Contact Us</a></li>
-			        </ul>
-				  </div>
-				</nav>
-			</div>
-		</div>
-
-	<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-3">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
-                            </span>Content</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-home">
+                            </span> Home</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
@@ -51,23 +38,23 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://www.jquery2dotnet.com">Articles</a>
+                                        <a href="#"><p id="ourMission"><span class="glyphicon glyphicon-map-marker"></span> Our Mission</p></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.jquery2dotnet.com">News</a>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.forbes.com/real-estate/#592fc56a7b72" target="_blank"> Real Estate News</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">Newsletters</a>
+                                        <span class="glyphicon glyphicon-usd text-info"></span><a href="https://www.consumeraffairs.com/finance/finance__companies.htm" target="_blank"> Mortgage Companies</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">Comments</a>
-                                        <span class="badge">42</span>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="https://www.powr.io/plugins/reviews/view/7027705?mode=page" target="_blank"> Reviews</a>
+                                        <span class="badge">97</span>
                                     </td>
                                 </tr>
                             </table>
@@ -77,8 +64,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
-                            </span>Modules</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-globe">
+                            </span> Where do you want to live?</a>
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse">
@@ -86,22 +73,12 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
+                                        <span class="glyphicon glyphicon-eye-open"></span><a href="#"> Home Search</a> 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.bankrate.com/calculators/mortgages/mortgage-payment-calculator.aspx" target="_blank"> Mortgage Calculator</a>
                                     </td>
                                 </tr>
                             </table>
@@ -111,66 +88,116 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
-                            </span>Account</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-piggy-bank">
+                            </span> Nearby Restaurants</a> 
                         </h4>
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Change Password</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Notifications</a> <span class="label label-info">5</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Import/Export</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
-                                            Delete Account</a>
-                                    </td>
-                                </tr>
-                            </table>
+                            <form id="search-form">
+                                <label for="sel1">Select a category</label>
+                                <select class="form-control" id="sel1">
+                                    <option>Burger Joint</option>
+                                    <option>Pizza Place</option>
+                                    <option>Sandwich Place</option>
+                                    <option>Steakhouse</option>
+                                    <option>Food Trucks</option>
+                                    <option>Fast Food</option>
+                                    <option>BBQ</option>
+                                    <option>Mexican Restaurant</option>
+                                    <option>Indian Restaurant</option>
+                                    <option>Chinese Restaurant</option>
+                                    <option>Japanese Restaurant</option>
+                                    <option>Korean Restaurant</option>
+                                    <option>Vietnamese Restaurant</option>
+                                    <option>Bubble Tea</option>
+                                    <option>Coffee Shop</option>
+                                    <option>Dessert Shop</option>
+                                    <option>Pet Cafe</option>
+                                    <option>Bars</option>
+                                    <option>Lounge</option>
+                                    <option>Nightclub</option>
+                                </select>
+                            </form>
+                            <form id="number-form">
+                                <label for="byNumberInput">Number of locations to retrieve:</label><br>
+                                <input type="number" id="numRecords" name="numberSearch" class="form-control">
+                            </form>
+                            <form id="rating-form">
+                                <label for="byRatingInput">Radius of Search (in meters)</label><br>
+                                <input type="number" id="searchRadius" name="ratingSearch" claas="form-control">
+                            </form>
+                            <form id="city-form">
+                                <label for="byCityInput">Enter the zip code</label><br>
+                                <input type="text" id="searchByCity" name="citySearch" claas="form-control">
+                            </form>
+                            <br>
+                            <input id="findSearch" type="submit" value="Search">
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
-                            </span>Reports</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-phone">
+                            </span> Contact Us</a>
                         </h4>
-                    </div>
+                    </div>   
                     <div id="collapseFour" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                        <a href="#">Change Password</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                        <a href="#">Notifications</a> <span class="label label-info">3</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+                                        <a href="#">Import/Export</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="#" class="text-danger">
+                                        Delete Account</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-wrench"></span>Help</a>
+                        </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-home"></span><a href="#"> Realtors</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-usd"></span><a href="#"> Financial Department</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span><a href="#"> IT Department</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span><a href="#"> Customer Service</a>
                                     </td>
                                 </tr>
                             </table>
@@ -178,33 +205,17 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
+        <div class="col-md-9 col-sm-9">
+            <div id="map"></div>
+            <div id="foursquareResults">
+            </div>
+        </div>
     </div>
 </div>
-
-		<div class="row">
-			<div class="col-md-8">
-				<div id="mapContainer">
-					<iframe
-					  width="1000"
-					  height="600"
-					  frameborder="0" style="border:0"
-					  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCTdAHDFgylm2HfbLYX93tWJ_zesUk03mI
-					    &center=30.2870079,-97.7312834&zoom=15" allowfullscreen>
-					</iframe>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-	<div id="footer">
-		<div class="container text-center">
-			<p class="text-muted credit" style="color:#fff">Made in Austin with love</p>
-		</div>
-	</div>
-
-
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4&callback=initMap"
+  async defer>
+</script>       
+<script src="assets/javascript/javascript.js"></script>
 </body>
 </html>
