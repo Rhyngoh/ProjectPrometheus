@@ -2,16 +2,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+<<<<<<< HEAD
 	<h2 align="center">Project Prometheus</h2>
 	
+=======
+	<title>Project Prometheus</title>
+>>>>>>> RyansBranch
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
+<<<<<<< HEAD
 	<link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps" rel="stylesheet">
 
 	<!-- Style -->
 	<link rel="stylesheet" href="style.css">
+=======
+
+	<!-- Style -->
+	<link rel="stylesheet" href="assets/css/style.css">
+>>>>>>> RyansBranch
 
 	<!-- Viewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +29,7 @@
 	<!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
 
 </head>
 <body>
@@ -31,6 +42,47 @@
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-home">
                             </span> Home</a>
+=======
+	<!-- Firebase -->
+	<!--<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>-->
+</head>
+<body>
+<div id="wrap">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar" id="navbarMain">
+				  <div class="container-fluid">
+				    <div class="navbar-header">
+				      <a id="navhoveroverid" class="navbar-brand" href="#">Project Prometheus</a>
+				    </div>
+				    <ul class="nav navbar-nav navbar-right">
+			            <li class="active"><a id="navhoverover" href="#">Search<span class="sr-only">(current)</span></a></li>
+			            <li><a id="navhoverover" href="#">About Prometheus</a></li>
+			            <li><a id="navhoverover" href="#">Contact Us</a></li>
+			        </ul>
+				  </div>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div id="map"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="foursquareResults">
+                        </div>
+                    </div>
+                </div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
+                            </span>Nearby Restaurants</a>
+>>>>>>> RyansBranch
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
@@ -38,23 +90,77 @@
                             <table class="table">
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-map-marker"></span><a href="http://www.jquery2dotnet.com"> Our Mission</a>
+=======
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><form id="search-form">
+                                            <label for="sel1">Select a category</label>
+                                            <select class="form-control" id="sel1">
+                                                <option>Burger Joint</option>
+                                                <option>Pizza Place</option>
+                                                <option>Sandwich Place</option>
+                                                <option>Steakhouse</option>
+                                                <option>Food Trucks</option>
+                                                <option>Fast Food</option>
+                                                <option>BBQ</option>
+                                                <option>Mexican Restaurant</option>
+                                                <option>Indian Restaurant</option>
+                                                <option>Chinese Restaurant</option>
+                                                <option>Japanese Restaurant</option>
+                                                <option>Korean Restaurant</option>
+                                                <option>Vietnamese Restaurant</option>
+                                                <option>Bubble Tea</option>
+                                                <option>Coffee Shop</option>
+                                                <option>Dessert Shop</option>
+                                                <option>Pet Cafe</option>
+                                                <option>Bars</option>
+                                                <option>Lounge</option>
+                                                <option>Nightclub</option>
+                                            </select>
+                                        </form>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><form id="number-form">
+                                            <label for="byNumberInput">Number of locations to retrieve:</label><br>
+                                            <input type="number" id="numRecords" name="numberSearch" class="form-control">
+                                        </form>
+>>>>>>> RyansBranch
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.forbes.com/real-estate/#592fc56a7b72"> Real Estate News</a>
+=======
+                                        <span class="glyphicon glyphicon-file text-info"></span><form id="rating-form">
+                                            <label for="byRatingInput">Radius of Search (in meters)</label><br>
+                                            <input type="number" id="searchRadius" name="ratingSearch" claas="form-control">
+                                        </form>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-usd text-info"></span><a href="https://www.consumeraffairs.com/finance/finance__companies.htm"> Mortgage Companies</a>
+=======
+                                        <span class="glyphicon glyphicon-file text-info"></span><form id="city-form">
+                                            <label for="byCityInput">Enter the zip code</label><br>
+                                            <input type="text" id="searchByCity" name="citySearch" claas="form-control">
+                                        </form>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com"> Reviews</a>
                                         <span class="badge">42</span>
+=======
+                                        <span class="glyphicon glyphicon-comment text-success"></span><input id="findSearch" type="submit" value="Search">
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                             </table>
@@ -64,8 +170,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
+<<<<<<< HEAD
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-globe">
                             </span> Where do you want to live?</a>
+=======
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
+                            </span>Modules</a>
+>>>>>>> RyansBranch
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse">
@@ -73,12 +184,30 @@
                             <table class="table">
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <a href="http://www.jquery2dotnet.com">Home Search</a> 
+=======
+                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-usd"></span><a href="http://www.bankrate.com/calculators/mortgages/mortgage-payment-calculator.aspx"> Mortgage Calculator</a>
+=======
+                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                             </table>
@@ -89,7 +218,11 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
+<<<<<<< HEAD
                             </span> Account</a>
+=======
+                            </span>Account</a>
+>>>>>>> RyansBranch
                         </h4>
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse">
@@ -123,8 +256,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
+<<<<<<< HEAD
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-phone">
                             </span> Contact Us</a>
+=======
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
+                            </span>Reports</a>
+>>>>>>> RyansBranch
                         </h4>
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse">
@@ -132,28 +270,45 @@
                             <table class="table">
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-home"></span><a href="http://www.jquery2dotnet.com"> Realtors</a>
+=======
+                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com"> Financial Department</a>
+=======
+                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com"> IT Department</a>
+=======
+                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
+<<<<<<< HEAD
                                         <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com"> Customer Service</a>
+=======
+                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+>>>>>>> RyansBranch
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
             </div>
         </div>  
     </div>
@@ -182,6 +337,22 @@
 
 
 
+=======
+			    </div>
+		    </div>
+    	</div>
+    </div>
+</div>
+	<div id="footer">
+		<div class="container text-center">
+			<p class="text-muted credit" style="color:#fff">Made in Austin with love</p>
+		</div>
+	</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4&callback=initMap"
+  async defer>
+</script>       
+<script src="assets/javascript/javascript.js"></script>
+>>>>>>> RyansBranch
 
 </body>
 </html>

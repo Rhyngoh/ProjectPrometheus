@@ -1,0 +1,27 @@
+*{
+    font-family: "Merriweather", "Open Sans", serif, sans-serif;
+}
+html, body {
+    height: 100%;
+}
+#wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+#footer {
+    height: 60px;
+    background-color: #666;
+    margin-top:10px;
+}
+#footer p {
+    font-size: 12px;
+    margin-top: 20px;
+}
+#map{
+    height: 600px;
+    width: 1000px;
+    frameborder: 0;
+    border:0;
+}
