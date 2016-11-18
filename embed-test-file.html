@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>maps test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-8">
+    
+      <iframe 
+        width="600" height="450"
+        frameborder="0" style="border:0"
+        id="place"
+        src=>
+      </iframe>
+
+      <iframe 
+        width="600" height="450"
+        frameborder="0" style="border:0"
+        id="search"
+        src=>
+      </iframe>
+
+    </div>
+
+    <div class="col-md-4">
+    
+      <form>
+        <div class="form-group">
+          <label for="text">Enter location:</label>
+          <input type="text" class="form-control" id="location">
+        </div>
+        <div class="form-group">
+          <label for="text">Search term:</label>
+          <input type="text" class="form-control" id="searchFor">
+        </div>
+        <button type="submit" id="enter" class="btn btn-default">Submit</button>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script type="text/javascript">
+
+myKey = "AIzaSyCTdAHDFgylm2HfbLYX93tWJ_zesUk03mI"
+
+function embedMap() {
+  var location = $("#location").val().trim();
+  var searchFor = $("#searchFor").val().trim();
+ 
+//location query  
+var queryURL1 = "https://www.google.com/maps/embed/v1/place?key=" + myKey + "&q=" +location;
+//search query
+var queryURL2 = "https://www.google.com/maps/embed/v1/search?key=" + myKey + "&q=" + searchFor + " near " + location;
+
+
+  $("#place").attr("src", queryURL1)
+  $("#search").attr("src", queryURL2)
+}
+
+//when add button is clicked
+$("#enter").on("click", function() {  
+  alert("clicked");
+  
+  embedMap();
+  return false;
+});
+
+//$.ajax({url: queryURL1, method: 'GET'})
+//  .done(function(response) {
+//    var results1 = response.data;
+//    console.log(results1)
+//  });
+
+
+//$.ajax({url: queryURL2, method: 'GET'})
+//  .done(function(response) {
+//    var results2 = response.data;
+//    console.log(results2)
+//  });
+
+</script>
+</body>
+
+</html>
