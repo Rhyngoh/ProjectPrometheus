@@ -22,20 +22,46 @@ var tTrailsAPI = "41e73178218a6deff1d2b78b1b251085da804e04d528a0d6ad601f06db5bb1
 //base url: http://data.streetfoodapp.com/1.1/
 //Yelp API key
 var yelpAPI = "c5rwaF5qpeOdsja0OFZNMA";
-//Zillow API
+//Zillow API/ZWSID
 var zillowAPI = "X1-ZWz19hcd8pk64r_5i268";
-
+//foursquare client id
+var foursquareClient = "Z52OIOVPKTHUNPPYWRTVYA0BKBA30MD1PNQ1AG2QAKVI4JIB";
+var foursquareSecret = "GY1LWAXZWEUOS1KNUQSHYSR4JQBV4XY4HH0PQN0ULMPTD5GH";
+var foursquareQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + foursquareClient + "&client_secret=" + foursquareSecret + "&v=20161117&near=";
 //Initial Google Maps load
 var map;
 //Yelp variables
 var searchResults = "";
 var searchNumber = 10;
+var searchRadius = 1000;
+var zipCode = "";
 //var searchRating = 4;
 var searchCity = "";
 //var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
 var yelpQueryURL = "https://api.yelp.com/v2/search/?key=" + yelpAPI + "&sort=1&term=";
 var locationCounter = 0;
-
+var restaurantArray = [
+	["Burger Joint", "4bf58dd8d48988d16c941735"],
+	["Pizza Place", "4bf58dd8d48988d1ca941735"],
+	["Sandwich Place", "4bf58dd8d48988d1c5941735"],
+	["Steakhouse", "4bf58dd8d48988d1cc941735"],
+	["Food Trucks", "4bf58dd8d48988d1cb941735"],
+	["Fast Food", "4bf58dd8d48988d16e941735"],
+	["BBQ" , "4bf58dd8d48988d1df931735"],
+	["Mexican Restaurant", "4bf58dd8d48988d1c1941735"],
+	["Indian Restaurant", "4bf58dd8d48988d10f941735"],
+	["Chinese Restaurant" , "4bf58dd8d48988d145941735"],
+	["Japanese Restaurant", "4bf58dd8d48988d111941735"],
+	["Korean Restaurant" , "4bf58dd8d48988d113941735"],
+	["Vietnamese Restaurant" , "4bf58dd8d48988d14a941735"],
+	["Bubble Tea", "52e81612bcbc57f1066b7a0c"],
+	["Coffee Shop", "4bf58dd8d48988d1e0931735"],
+	["Dessert Shop" , "4bf58dd8d48988d1d0941735"],
+	["Pet Cafe" , "56aa371be4b08b9a8d573508"],
+	["Bars", "4bf58dd8d48988d116941735"],
+	["Lounge" , "4bf58dd8d48988d121941735"],
+	["Nightclub" , "4bf58dd8d48988d11f941735"]
+];
 //=======================//
 //=======Methods=========//
 //=======================//
@@ -52,22 +78,29 @@ function initMap() {
 	});
 }
 $("#findSearch").on("click", function(){
-	searchResults = $("#searchByName").val().trim();
-	queryURL = yelpQueryURL + searchResults;
+	zipCode = $("#searchByCity").val().trim();
+	queryURL = foursquareQueryURL + zipCode;
+	console.log(queryURL);
+	searchResults = $("#sel1").val();
+	// convert searchResults into something to compare to the restaurantObjects to grab the id
+	// queryURL = queryURL + "&categoryId=" + idnumber;
+	var restID = restaurantArray.indexOf(searchResults);
+	console.log(restID);
 	searchNumber = $("#numRecords").val();
-//	searchRating = $("#yelpRating").val();
-	searchCity = $("#searchByCity").val().trim();
+	searchRadius = $("#searchRadius").val();
 	if (parseInt(searchNumber)){
 		queryURL = queryURL + "&limit=" + searchNumber;
+		console.log(queryURL);
 	}
-	if (parseInt(searchCity)){
-		queryURL = queryURL + "&location=" + searchCity;
+	if (parseInt(searchRadius)){
+		queryURL = queryURL + "&radius=" + searchRadius;
+		console.log(queryURL);
 	}
-	runQuery(searchNumber, queryURL);
-
+	//runQuery(searchNumber, queryURL);
+	console.log(queryURL);
 	return false;
 });
-function runQuery(numLocations, queryURL){
+/*function runQuery(numLocations, queryURL){
 	$.ajax({url: queryURL, method: "GET"})
 		.done(function(yelpData) {
 			console.log(yelpData);
@@ -80,7 +113,7 @@ function runQuery(numLocations, queryURL){
 
 			}
 		})
-}
+}*/
 $(document).ready(function() {
 	//on click search button for first accordion, do function
 	/*function yelpCall(){

@@ -17,7 +17,6 @@
 	<!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 	<!-- Firebase -->
 	<!--<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>-->
 </head>
@@ -65,8 +64,29 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-pencil text-primary"></span><form id="search-form">
-                                            <label for="byNameInput">Search by Name:</label><br>
-                                            <input type="text" id="searchByName" name="findingSearch" class="form-control">
+                                            <label for="sel1">Select a category</label>
+                                            <select class="form-control" id="sel1">
+                                                <option>Burger Joint</option>
+                                                <option>Pizza Place</option>
+                                                <option>Sandwich Place</option>
+                                                <option>Steakhouse</option>
+                                                <option>Food Trucks</option>
+                                                <option>Fast Food</option>
+                                                <option>BBQ</option>
+                                                <option>Mexican Restaurant</option>
+                                                <option>Indian Restaurant</option>
+                                                <option>Chinese Restaurant</option>
+                                                <option>Japanese Restaurant</option>
+                                                <option>Korean Restaurant</option>
+                                                <option>Vietnamese Restaurant</option>
+                                                <option>Bubble Tea</option>
+                                                <option>Coffee Shop</option>
+                                                <option>Dessert Shop</option>
+                                                <option>Pet Cafe</option>
+                                                <option>Bars</option>
+                                                <option>Lounge</option>
+                                                <option>Nightclub</option>
+                                            </select>
                                         </form>
                                     </td>
                                 </tr>
@@ -81,15 +101,15 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-file text-info"></span><form id="rating-form">
-                                            <label for="byRatingInput">Minimum rating</label><br>
-                                            <input type="number" id="yelpRating" name="ratingSearch" claas="form-control">
+                                            <label for="byRatingInput">Radius of Search (in meters)</label><br>
+                                            <input type="number" id="searchRadius" name="ratingSearch" claas="form-control">
                                         </form>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-file text-info"></span><form id="city-form">
-                                            <label for="byCityInput">Around which city</label><br>
+                                            <label for="byCityInput">Enter the zip code</label><br>
                                             <input type="text" id="searchByCity" name="citySearch" claas="form-control">
                                         </form>
                                     </td>
