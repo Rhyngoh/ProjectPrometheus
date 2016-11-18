@@ -138,6 +138,9 @@ function runQuery(searchNumber, queryURL){
 		});
 }
 $(document).ready(function() {
+	$("#ourMission").on("click", function(){
+		$("#map").html("<p>Our mission is to provide</p>");
+	});
 	//on click search button for first accordion, do function
 	/*function yelpCall(){
 		var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";

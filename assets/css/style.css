@@ -3,7 +3,7 @@
 }
 html, body {
     height: 100%;
-}
+}/*
 #wrap {
     min-height: 100%;
     height: auto;
@@ -18,10 +18,70 @@ html, body {
 #footer p {
     font-size: 12px;
     margin-top: 20px;
-}
+}*/
 #map{
     height: 600px;
     width: 1000px;
     frameborder: 0;
     border:0;
+    background-color: white;
 }
+body { 
+    background: url("../images/chicago.jpg") no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h2 {
+    font-size: 70px;
+    color: #fff;
+    font: solid bold;
+    font-family: 'Oleo Script Swash Caps', cursive;
+}
+#foursquareResults{
+    color: white;
+}
+.foursqSearch{
+    background-color: #4B56AA;
+}
+.foursqSearch a{
+    color:white;
+}
+/* Rules for screen widths at 768px or lower */
+@media screen and (max-width: 768px) {
+
+    body {
+        background-color: #333;
+    }
+
+    .container {
+        width: ;
+
+    }
+
+    .wrapper {
+        width: 1280px;
+    }
+}
+
+@media screen and (max-width: 634px) {
+
+    body {
+    background-color: #ffffff ;
+    }
+
+    .wrapper {
+        width:960;
+    }   
+        
+@media screen and (max-width: 480px) {
+
+    body {
+    background-color: #ffffff ;
+    }
+
+    .wrapper {
+        width:800;
+    }   
