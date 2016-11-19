@@ -35,6 +35,7 @@ var searchResults = "";
 var searchNumber = 10;
 var searchRadius = 1000;
 var zipCode;
+var geoZip;
 //var searchRating = 4;
 var searchCity = "";
 //var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
@@ -64,20 +65,22 @@ var restaurantArray = [
 ];
 var latArray = [];
 var longArray = [];
+var placeArray = [];
+var lat = "";
+var lng = "";
 //=======================//
 //=======Methods=========//
 //=======================//
-//to place markers
-	/*	var austinMarker = new google.maps.Marker({
-			position: austinUT,
-			map: map
-		});
-	}*/
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-	  center: {lat: 30.2870079, lng: -97.7312834},
+	  center: {lat: lat, lng: lng},
 	  zoom: 15
 	});
+	var marker = new google.maps.Marker({
+          position: {lat: lat, lng: lng},
+          map: map,
+          title: 'Home Search Address'
+        });
 }
 $("#findSearch").on("click", function(){
 	latArray = [];
@@ -85,6 +88,7 @@ $("#findSearch").on("click", function(){
 	if (zipCode){
 		storeTheZip();
 	} else {
+		//do something to warn the user to put the correct zip code in
 		queryURL = foursquareQueryURL + "78705";
 	}
 	searchResults = $("#sel1").val();
@@ -113,7 +117,7 @@ $("#findSearch").on("click", function(){
 	locationCounter = 0;
 	runQuery(searchNumber, queryURL);
 	console.log(queryURL);
-	//changeTheMap();
+	changeTheMap();
 	return false;
 });
 function runQuery(searchNumber, queryURL){
@@ -141,12 +145,15 @@ function runQuery(searchNumber, queryURL){
 				}
 				latArray.push(response.response.groups[0].items[i].venue.location.lat);
 				longArray.push(response.response.groups[0].items[i].venue.location.lng);
+				placeArray.push(response.response.groups[0].items[i].venue.name);
 			}
 			console.log(latArray);
 			console.log(longArray);
 		});
 }
 function storeTheZip(){
+	geoLocator();
+	//zipCode = geoZip;
 	zipCode = $("#searchByZip").val().trim();
 	queryURL = foursquareQueryURL + zipCode;
 	console.log(queryURL);
@@ -161,43 +168,59 @@ function storeTheZip(){
 $(document).on("click", "#findZip", storeTheZip);
 
 $("#ourMission").on("click", function(){
-	$("#map").html("<p>Our mission is to provide</p>");
+	$("#map").html("<p id='mission'>We want to provide you the easiest home search for the type of lifestyle you want to lead. Whether you are a fitness minded person who wants to be surrounded with healthy choices or a family that wants the best education for their children, this website has it all. We want to make the process of finding that perfect location, the perfect home and the process of buying easy for you! Let our family help your family find the perfect home!</p>");
+	$("#map").css({"background": "url('assets/images/fancypool1.jpg') no-repeat fixed center", "background-size" : "1100px 650px"});
 });
 
+var infowindow;
+var marker;
 function changeTheMap(){
-	var infowindow = new google.maps.InfoWindow();
-	var marker;
+	//infowindow = new google.maps.InfoWindow();
+	//marker;
+	//
+	map = new google.maps.Map(document.getElementById('map'), {
+		  center: {lat: lat, lng: lng},
+		  zoom: 15
+		});
+	//
 	for (var j = 0; j < searchNumber;j++){
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(latArray[j], longArray[j]),
-			map: map
+			map: map,
+			title: placeArray[j]
 		});
-		google.maps.event.addListener(marker, "click", (function(marker, j) {
+		(function(marker,j){
+			google.maps.event.addListener(marker, "click", function() {
+				infowindow = new google.maps.InfoWindow({
+					content: placeArray[j]
+				});
+				infowindow.open(map, marker);
+			});
+		})(marker, j);
+		/*google.maps.event.addListener(marker, "click", (function(marker, j) {
 			return function(){
-				infowindow.setContent(testLocations[j].name);
+				infowindow.setContent(placeArray[j]);
 				infowindow.open(map, marker);
 			}
-		})(marker, j));
+		})(marker, j));*/
 	}
 }
 
-$("#enter").on("click", function() {  
-    //read value from form
-    var location = $("#location").val();
-    var searchFor = $("#searchFor").val();
-    //check results
-    console.log("loc: "+ location + " search: "+ searchFor);
+function geoLocator(){
+    var location = $("#searchByAddress").val().trim();
+    console.log("loc: "+ location);
  
-var queryGeoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=" + myKey
-console.log(queryGeoURL)
+var queryGeoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=" + gMapsJSAPI;
+console.log(queryGeoURL);
 
 $.ajax({url: queryGeoURL, method: 'GET'})
-      //create object
       .done(function(geoResponse) {
 
-console.log(geoResponse)
-
-var lat = geoResponse.results[0].geometry.location.lat;
-var lng = geoResponse.results[0].geometry.location.lng;
+console.log(geoResponse);
+//geoZip = geoResponse.results[0].address_components[8].short_name;
+lat = geoResponse.results[0].geometry.location.lat;
+lng = geoResponse.results[0].geometry.location.lng;
 
 console.log(lat+","+lng);
+	});
+  }
