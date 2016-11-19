@@ -9,8 +9,6 @@ if (navigator.geolocation) {
 //=======================//
 //=======Variables=======//
 //=======================//
-//Google Maps Embed API key
-var gMapsEmbedAPI = "AIzaSyCTdAHDFgylm2HfbLYX93tWJ_zesUk03mI";
 //Google Maps Javascript API key
 var gMapsJSAPI = "AIzaSyB6doLPrG5Th0zwPgg4rqEC5H-_LW5JL5g";
 //ANOTHER KEY AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4
@@ -18,8 +16,6 @@ var gMapsJSAPI = "AIzaSyB6doLPrG5Th0zwPgg4rqEC5H-_LW5JL5g";
 var tTrailsAPI = "41e73178218a6deff1d2b78b1b251085da804e04d528a0d6ad601f06db5bb14a";
 //Simply RETS API key
 // var sRETSAPI = "";
-//Street Food App API only for canada/boston
-//base url: http://data.streetfoodapp.com/1.1/
 //Yelp API key
 var yelpAPI = "c5rwaF5qpeOdsja0OFZNMA";
 //Zillow API/ZWSID
@@ -35,7 +31,6 @@ var searchResults = "";
 var searchNumber = 10;
 var searchRadius = 1000;
 var zipCode;
-var geoZip;
 //var searchRating = 4;
 var searchCity = "";
 //var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
@@ -76,7 +71,7 @@ function initMap() {
 	  center: {lat: lat, lng: lng},
 	  zoom: 15
 	});
-	var marker = new google.maps.Marker({
+	var homeMarker = new google.maps.Marker({
           position: {lat: lat, lng: lng},
           map: map,
           title: 'Home Search Address'
@@ -117,16 +112,29 @@ $("#findSearch").on("click", function(){
 	locationCounter = 0;
 	runQuery(searchNumber, queryURL);
 	console.log(queryURL);
-	changeTheMap();
 	return false;
 });
+				//var restAddress = "";
+				//var restPhone = "";
 function runQuery(searchNumber, queryURL){
 	$.ajax({url: queryURL, method: "GET"})
 		.done(function(response) {
+			var infowindow;
+			var marker;
+			map = new google.maps.Map(document.getElementById('map'), {
+			  center: {lat: lat, lng: lng},
+			  zoom: 15
+			});
+			var homeMarker = new google.maps.Marker({
+	          position: {lat: lat, lng: lng},
+	          map: map,
+	          title: 'Home Search Address'
+	        });
 			console.log(response);
 			console.log(response.response.groups[0].items[0].venue.location.address);
 			for (var i = 0; i < searchNumber; i++){
 				locationCounter++;
+				
 				var foursquareResults = $("<div>");
 				foursquareResults.addClass("foursqSearch");
 				foursquareResults.attr("id", "foursqSearch-" + locationCounter);
@@ -136,28 +144,38 @@ function runQuery(searchNumber, queryURL){
 				}
 				if(response.response.groups[0].items[i].venue.location.address){
 					$("#foursqSearch-" + locationCounter).append("<h4>" + response.response.groups[0].items[i].venue.location.address + "</h4>");
+					//restAddress = response.response.groups[0].items[i].venue.location.address;
 				}
 				if(response.response.groups[0].items[i].venue.contact.formattedPhone){
 					$("#foursqSearch-" + locationCounter).append("<h5>" + response.response.groups[0].items[i].venue.contact.formattedPhone + "</h5>");
+					//restPhone = response.response.groups[0].items[i].venue.contact.formattedPhone;
 				}
 				if(response.response.groups[0].items[i].venue.url){
 					$("#foursqSearch-" + locationCounter).append("<h5><a href='" + response.response.groups[0].items[i].venue.url + "'>" + response.response.groups[0].items[i].venue.url + "</a></h5>");
 				}
-				latArray.push(response.response.groups[0].items[i].venue.location.lat);
-				longArray.push(response.response.groups[0].items[i].venue.location.lng);
-				placeArray.push(response.response.groups[0].items[i].venue.name);
+				marker = new google.maps.Marker({
+					position: new google.maps.LatLng(response.response.groups[0].items[i].venue.location.lat, response.response.groups[0].items[i].venue.location.lng),
+					map: map,
+					title: response.response.groups[0].items[i].venue.name,
+					icon: "assets/images/restaurantmarker.png"
+				});
+				(function(marker,i){
+					google.maps.event.addListener(marker, "click", function() {
+						infowindow = new google.maps.InfoWindow({
+							content: response.response.groups[0].items[i].venue.name
+							// + "<br>" + restAddress + "<br>" + restPhone
+						});
+						infowindow.open(map, marker);
+					});
+				})(marker, i);
 			}
-			console.log(latArray);
-			console.log(longArray);
 		});
 }
 function storeTheZip(){
 	geoLocator();
-	//zipCode = geoZip;
 	zipCode = $("#searchByZip").val().trim();
 	queryURL = foursquareQueryURL + zipCode;
 	console.log(queryURL);
-	//init map here
 	var js_file = document.createElement('script');
 	js_file.type = 'text/javascript';
 	js_file.src = 'https://maps.googleapis.com/maps/api/js?callback=initMap&key=' + gMapsJSAPI;
@@ -168,59 +186,23 @@ function storeTheZip(){
 $(document).on("click", "#findZip", storeTheZip);
 
 $("#ourMission").on("click", function(){
-	$("#map").html("<p id='mission'>We want to provide you the easiest home search for the type of lifestyle you want to lead. Whether you are a fitness minded person who wants to be surrounded with healthy choices or a family that wants the best education for their children, this website has it all. We want to make the process of finding that perfect location, the perfect home and the process of buying easy for you! Let our family help your family find the perfect home!</p>");
-	$("#map").css({"background": "url('assets/images/fancypool1.jpg') no-repeat fixed center", "background-size" : "1100px 650px"});
+	$("#map").html("<p id='mission'>Our mission is to provide the simplest home search for the type of lifestyle you want to lead. Whether you are a fitness minded person who wants to be surrounded with healthy choices or a family that wants the best education for their children, this website has it all. We want to make the process of finding that perfect location, the perfect home and the process of buying easy for you! Let our family help your family find the perfect home!</p>");
+	$("#map").css({"background": "url('assets/images/pool1.jpg') no-repeat fixed center"});
 });
-
-var infowindow;
-var marker;
-function changeTheMap(){
-	//infowindow = new google.maps.InfoWindow();
-	//marker;
-	//
-	map = new google.maps.Map(document.getElementById('map'), {
-		  center: {lat: lat, lng: lng},
-		  zoom: 15
-		});
-	//
-	for (var j = 0; j < searchNumber;j++){
-		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(latArray[j], longArray[j]),
-			map: map,
-			title: placeArray[j]
-		});
-		(function(marker,j){
-			google.maps.event.addListener(marker, "click", function() {
-				infowindow = new google.maps.InfoWindow({
-					content: placeArray[j]
-				});
-				infowindow.open(map, marker);
-			});
-		})(marker, j);
-		/*google.maps.event.addListener(marker, "click", (function(marker, j) {
-			return function(){
-				infowindow.setContent(placeArray[j]);
-				infowindow.open(map, marker);
-			}
-		})(marker, j));*/
-	}
-}
 
 function geoLocator(){
     var location = $("#searchByAddress").val().trim();
     console.log("loc: "+ location);
- 
-var queryGeoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=" + gMapsJSAPI;
-console.log(queryGeoURL);
+	var queryGeoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=" + gMapsJSAPI;
+	console.log(queryGeoURL);
 
-$.ajax({url: queryGeoURL, method: 'GET'})
-      .done(function(geoResponse) {
+	$.ajax({url: queryGeoURL, method: 'GET'})
+	      .done(function(geoResponse) {
 
-console.log(geoResponse);
-//geoZip = geoResponse.results[0].address_components[8].short_name;
-lat = geoResponse.results[0].geometry.location.lat;
-lng = geoResponse.results[0].geometry.location.lng;
+		console.log(geoResponse);
+		lat = geoResponse.results[0].geometry.location.lat;
+		lng = geoResponse.results[0].geometry.location.lng;
 
-console.log(lat+","+lng);
+		console.log(lat+","+lng);
 	});
-  }
+}
