@@ -1,0 +1,66 @@
+Family Lifestyle
+
+Arcade
+4bf58dd8d48988d1e1931735
+Theme Park
+4bf58dd8d48988d182941735
+Water Park
+4bf58dd8d48988d193941735
+Zoo
+4bf58dd8d48988d17b941735
+Elementary School
+4f4533804b9074f6e4fb0105
+Middle School
+4f4533814b9074f6e4fb0106
+High School
+4bf58dd8d48988d13d941735
+Burger Joint
+4bf58dd8d48988d16c941735
+Ice Cream Shop
+4bf58dd8d48988d1c9941735
+Fast Food Restaurant
+4bf58dd8d48988d16e941735
+
+
+Nightlife Lifestyle
+
+Casino
+4bf58dd8d48988d17c941735
+Music Venue
+4bf58dd8d48988d1e5931735
+Pool Hall
+4bf58dd8d48988d1e3931735
+Bar
+4bf58dd8d48988d116941735
+Nightclub
+4bf58dd8d48988d11f941735
+Cocktail Bar
+4bf58dd8d48988d11e941735
+French Restaurant
+4bf58dd8d48988d10c941735
+
+
+Healthy Lifestyle
+
+Pilates Studio
+5744ccdfe4b0c0459246b4b2
+Yoga Studio
+4bf58dd8d48988d102941735
+Martial Arts Dojo
+4bf58dd8d48988d101941735
+Outdoors & Recreation
+4d4b7105d754a06377d81259
+Gym / Fitness Center
+4bf58dd8d48988d175941735
+Bike Trail
+56aa371be4b08b9a8d57355e
+Trail
+4bf58dd8d48988d159941735
+Juice Bar
+4bf58dd8d48988d112941735
+Salad Place
+4bf58dd8d48988d1bd941735
+Vegetarian / Vegan Restaurant
+4bf58dd8d48988d1d3941735
+
+
