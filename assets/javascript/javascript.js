@@ -9,8 +9,6 @@ if (navigator.geolocation) {
 //=======================//
 //=======Variables=======//
 //=======================//
-//Google Maps Embed API key
-var gMapsEmbedAPI = "AIzaSyCTdAHDFgylm2HfbLYX93tWJ_zesUk03mI";
 //Google Maps Javascript API key
 var gMapsJSAPI = "AIzaSyB6doLPrG5Th0zwPgg4rqEC5H-_LW5JL5g";
 //ANOTHER KEY AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4
@@ -18,8 +16,6 @@ var gMapsJSAPI = "AIzaSyB6doLPrG5Th0zwPgg4rqEC5H-_LW5JL5g";
 var tTrailsAPI = "41e73178218a6deff1d2b78b1b251085da804e04d528a0d6ad601f06db5bb14a";
 //Simply RETS API key
 // var sRETSAPI = "";
-//Street Food App API only for canada/boston
-//base url: http://data.streetfoodapp.com/1.1/
 //Yelp API key
 var yelpAPI = "c5rwaF5qpeOdsja0OFZNMA";
 //Zillow API/ZWSID
@@ -34,7 +30,7 @@ var map;
 var searchResults = "";
 var searchNumber = 10;
 var searchRadius = 1000;
-var zipCode = "";
+var zipCode;
 //var searchRating = 4;
 var searchCity = "";
 //var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
@@ -62,25 +58,34 @@ var restaurantArray = [
 	["Lounge" , "4bf58dd8d48988d121941735"],
 	["Nightclub" , "4bf58dd8d48988d11f941735"]
 ];
+var latArray = [];
+var longArray = [];
+var placeArray = [];
+var lat = "";
+var lng = "";
 //=======================//
 //=======Methods=========//
 //=======================//
-//to place markers
-	/*	var austinMarker = new google.maps.Marker({
-			position: austinUT,
-			map: map
-		});
-	}*/
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-	  center: {lat: 30.2870079, lng: -97.7312834},
+	  center: {lat: lat, lng: lng},
 	  zoom: 15
 	});
+	var homeMarker = new google.maps.Marker({
+          position: {lat: lat, lng: lng},
+          map: map,
+          title: 'Home Search Address'
+        });
 }
 $("#findSearch").on("click", function(){
-	zipCode = $("#searchByCity").val().trim();
-	queryURL = foursquareQueryURL + zipCode;
-	console.log(queryURL);
+	latArray = [];
+	longArray = [];
+	if (zipCode){
+		storeTheZip();
+	} else {
+		//do something to warn the user to put the correct zip code in
+		queryURL = foursquareQueryURL + "78705";
+	}
 	searchResults = $("#sel1").val();
 	var convertedSearch = encodeURIComponent(searchResults);
 	console.log(convertedSearch);
@@ -103,20 +108,33 @@ $("#findSearch").on("click", function(){
 		queryURL = queryURL + "&radius=5000";
 		console.log(queryURL);
 	}
-
 	$("#foursquareResults").html("");
 	locationCounter = 0;
 	runQuery(searchNumber, queryURL);
 	console.log(queryURL);
 	return false;
 });
+				//var restAddress = "";
+				//var restPhone = "";
 function runQuery(searchNumber, queryURL){
 	$.ajax({url: queryURL, method: "GET"})
 		.done(function(response) {
+			var infowindow;
+			var marker;
+			map = new google.maps.Map(document.getElementById('map'), {
+			  center: {lat: lat, lng: lng},
+			  zoom: 15
+			});
+			var homeMarker = new google.maps.Marker({
+	          position: {lat: lat, lng: lng},
+	          map: map,
+	          title: 'Home Search Address'
+	        });
 			console.log(response);
 			console.log(response.response.groups[0].items[0].venue.location.address);
 			for (var i = 0; i < searchNumber; i++){
 				locationCounter++;
+				
 				var foursquareResults = $("<div>");
 				foursquareResults.addClass("foursqSearch");
 				foursquareResults.attr("id", "foursqSearch-" + locationCounter);
@@ -126,66 +144,65 @@ function runQuery(searchNumber, queryURL){
 				}
 				if(response.response.groups[0].items[i].venue.location.address){
 					$("#foursqSearch-" + locationCounter).append("<h4>" + response.response.groups[0].items[i].venue.location.address + "</h4>");
+					//restAddress = response.response.groups[0].items[i].venue.location.address;
 				}
 				if(response.response.groups[0].items[i].venue.contact.formattedPhone){
 					$("#foursqSearch-" + locationCounter).append("<h5>" + response.response.groups[0].items[i].venue.contact.formattedPhone + "</h5>");
+					//restPhone = response.response.groups[0].items[i].venue.contact.formattedPhone;
 				}
 				if(response.response.groups[0].items[i].venue.url){
 					$("#foursqSearch-" + locationCounter).append("<h5><a href='" + response.response.groups[0].items[i].venue.url + "'>" + response.response.groups[0].items[i].venue.url + "</a></h5>");
 				}
-
+				marker = new google.maps.Marker({
+					position: new google.maps.LatLng(response.response.groups[0].items[i].venue.location.lat, response.response.groups[0].items[i].venue.location.lng),
+					map: map,
+					title: response.response.groups[0].items[i].venue.name,
+					icon: "assets/images/restaurantmarker.png"
+				});
+				(function(marker,i){
+					google.maps.event.addListener(marker, "click", function() {
+						infowindow = new google.maps.InfoWindow({
+							content: response.response.groups[0].items[i].venue.name
+							// + "<br>" + restAddress + "<br>" + restPhone
+						});
+						infowindow.open(map, marker);
+					});
+				})(marker, i);
 			}
 		});
 }
-$(document).ready(function() {
-	$("#ourMission").on("click", function(){
-		$("#map").html("<p>Our mission is to provide</p>");
+function storeTheZip(){
+	geoLocator();
+	zipCode = $("#searchByZip").val().trim();
+	queryURL = foursquareQueryURL + zipCode;
+	console.log(queryURL);
+	var js_file = document.createElement('script');
+	js_file.type = 'text/javascript';
+	js_file.src = 'https://maps.googleapis.com/maps/api/js?callback=initMap&key=' + gMapsJSAPI;
+	document.getElementsByTagName('head')[0].appendChild(js_file);
+	return false;
+}
+
+$(document).on("click", "#findZip", storeTheZip);
+
+$("#ourMission").on("click", function(){
+	$("#map").html("<p id='mission'>Our mission is to provide the simplest home search for the type of lifestyle you want to lead. Whether you are a fitness minded person who wants to be surrounded with healthy choices or a family that wants the best education for their children, this website has it all. We want to make the process of finding that perfect location, the perfect home and the process of buying easy for you! Let our family help your family find the perfect home!</p>");
+	$("#map").css({"background": "url('assets/images/pool1.jpg') no-repeat fixed center"});
+});
+
+function geoLocator(){
+    var location = $("#searchByAddress").val().trim();
+    console.log("loc: "+ location);
+	var queryGeoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=" + gMapsJSAPI;
+	console.log(queryGeoURL);
+
+	$.ajax({url: queryGeoURL, method: 'GET'})
+	      .done(function(geoResponse) {
+
+		console.log(geoResponse);
+		lat = geoResponse.results[0].geometry.location.lat;
+		lng = geoResponse.results[0].geometry.location.lng;
+
+		console.log(lat+","+lng);
 	});
-	//on click search button for first accordion, do function
-	/*function yelpCall(){
-		var yelpQueryURL = "https://api.yelp.com/v2/search/?term=food truck&location=austin,tx&sort=1&limit=10&key=c5rwaF5qpeOdsja0OFZNMA";
-		$.ajax({url: yelpQueryURL, method: "GET"}).done(function(response){
-			console.log(response);
-		});
-	}
-	yelpCall();*/
-	
-}); 
-/*
-var testLocations = [
-	songla = {
-		name: "Song La",
-		address: "411 W 23rd St",
-		lat: "30.2861",
-		long: "-97.7425",
-		city: "austin"
-	},
-	chipotle = {
-		name: "Chipotle",
-		address: "2230 Guadalupe St",
-		lat: "30.2857",
-		long: "-97.8123",
-		city: "austin"
-	},
-	torchys = {
-		name: "Torchys Tacos",
-		address: "2801 Guadalupe St",
-		lat: "30.2938",
-		long: "-97.8120",
-		city: "austin"
-	}
-]
-var infowindow = new google.maps.InfoWindow();
-var marker;
-for (var i = 0; i < testLocations.length;i++){
-	marker = new google.maps.Marker({
-		position: new google.maps.LatLng(testLocations[i].lat, testLocations[i].long),
-		map: map
-	});
-	google.maps.event.addListener(marker, "click", (function(marker, i) {
-		return function(){
-			infowindow.setContent(testLocations[i].name);
-			infowindow.open(map, marker);
-		}
-	})(marker, i));
-}*/
+}

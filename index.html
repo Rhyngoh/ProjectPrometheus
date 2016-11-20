@@ -73,7 +73,9 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-eye-open"></span><a href="#"> Home Search</a> 
+                                        <p id="homeSearch"><span class="glyphicon glyphicon-eye-open"></span> Home Search</p>
+                                        <form id='city-form'><label for='byCityInput'>Address: </label><br><input type='text' id='searchByAddress' name='addressSearch' class='form-control'></form><br>
+                                        <form id='zip-form'><label for='byZipInput'>Zip Code: </label><br><input type='text' id='searchByZip' name='zipSearch' class='form-control'></form><br><input id='findZip' type='submit' value='Search'>
                                     </td>
                                 </tr>
                                 <tr>
@@ -127,10 +129,10 @@
                                 <label for="byRatingInput">Radius of Search (in meters)</label><br>
                                 <input type="number" id="searchRadius" name="ratingSearch" claas="form-control">
                             </form>
-                            <form id="city-form">
+                            <!--<form id="city-form">
                                 <label for="byCityInput">Enter the zip code</label><br>
                                 <input type="text" id="searchByCity" name="citySearch" claas="form-control">
-                            </form>
+                            </form>-->
                             <br>
                             <input id="findSearch" type="submit" value="Search">
                         </div>
@@ -148,23 +150,22 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="#">Change Password</a>
+                                        <a href="https://www.linkedin.com/in/ryan-ngoh-9bb991129" target="_blank">Ryan Ngoh</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="#">Notifications</a> <span class="label label-info">3</span>
+                                        <a href="#" target="_blank">Niraj Gupta</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="#">Import/Export</a>
+                                        <a href="#" target="_blank">Laura Fiig</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="#" class="text-danger">
-                                        Delete Account</a>
+                                        <a href="#" target="_blank">Frankie Nicko</a>
                                     </td>
                                 </tr>
                             </table>
@@ -174,7 +175,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-wrench"></span>Help</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-wrench"></span> Help</a>
                         </h4>
                     </div>
                     <div id="collapseFive" class="panel-collapse collapse">
@@ -208,14 +209,20 @@
         </div>
         <div class="col-md-9 col-sm-9">
             <div id="map"></div>
-            <div id="foursquareResults">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div id="foursquareResults">
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4&callback=initMap"
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB56nQD_X5ceDNiShLjhUfrBTMAhKjYaY4&callback=initMap"
   async defer>
-</script>       
+</script>  -->     
 <script src="assets/javascript/javascript.js"></script>
 </body>
 </html>

@@ -19,13 +19,7 @@ html, body {
     font-size: 12px;
     margin-top: 20px;
 }*/
-#map{
-    height: 600px;
-    width: 1000px;
-    frameborder: 0;
-    border:0;
-    background-color: white;
-}
+
 body { 
     background: url("../images/chicago.jpg") no-repeat fixed;
     -webkit-background-size: cover;
@@ -33,18 +27,44 @@ body {
     -o-background-size: cover;
     background-size: cover;
 }
-
+#map{
+    height: 600px;
+    width: 1000px;
+    frameborder: 0;
+    border:0;
+}
 h2 {
     font-size: 70px;
-    color: #fff;
+    color: #A7CFE3;
+    /*color: #fff;*/
     font: solid bold;
     font-family: 'Oleo Script Swash Caps', cursive;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#mission {
+    font-size: 30px;
+    /*color: #fff;*/
+    border: black;
+    font: solid bold;
+    font-family: 'Oleo Script Swash Caps', cursive;
+    text-align: center;
+    padding: 25px 110px 0 450px ;
+    height: 600px;
+    frameborder: 0;
+    border: 0;
+    /*color: #3498DB;*/
+    color: #A7CFE3;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 #foursquareResults{
     color: white;
 }
 .foursqSearch{
-    background-color: #4B56AA;
+    background: #4B56AA; 
+    background: -webkit-linear-gradient(left top, #4B56AA, #02CC8F); 
+    background: -o-linear-gradient(bottom right, #4B56AA, #02CC8F); 
+    background: -moz-linear-gradient(bottom right, #4B56AA, #02CC8F); 
+    background: linear-gradient(to bottom right, #4B56AA, #02CC8F);
 }
 .foursqSearch a{
     color:white;
