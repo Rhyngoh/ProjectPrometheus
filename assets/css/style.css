@@ -3,23 +3,7 @@
 }
 html, body {
     height: 100%;
-}/*
-#wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
 }
-#footer {
-    height: 60px;
-    background-color: #666;
-    margin-top:10px;
-}
-#footer p {
-    font-size: 12px;
-    margin-top: 20px;
-}*/
-
 body { 
     background: url("../images/chicago.jpg") no-repeat fixed;
     -webkit-background-size: cover;
@@ -40,6 +24,12 @@ h2 {
     font: solid bold;
     font-family: 'Oleo Script Swash Caps', cursive;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#usersName{
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: black;
 }
 #mission {
     font-size: 30px;

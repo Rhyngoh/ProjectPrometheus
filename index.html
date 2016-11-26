@@ -2,27 +2,44 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<h2 align="center">Project Prometheus</h2>
 	<title>Project Prometheus</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps" rel="stylesheet">
-
 	<!-- Style -->
 	<link rel="stylesheet" href="assets/css/style.css">
-
 	<!-- Viewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 	<!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div id="lastUser">
+                <p id="theName">Last User: </p>
+                <p id="theLocation">Searched Location: </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2 align="center">Project Prometheus</h2>
+        </div>
+        <div class="col-md-3">
+            <div id="putTheName">
+                <div class="input-group">
+                    <input type="text" id="userName" class="form-control" placeholder="What's your name?">
+                    <span class="input-group-btn">
+                        <button id="nameInput" class="btn btn-default" type="button">Enter</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-3 col-md-3">
             <div class="panel-group" id="accordion">

@@ -27,6 +27,22 @@ var lng = 0;
 //placeholder variable for certain searches
 var placeholder;
 //=======================//
+//========Firebase=======//
+//=======================//
+var config = {
+  	apiKey: "AIzaSyDEq2_LrJidXq5NhH0ZHkwdheFarqovwN0",
+	authDomain: "project-prometheus-86bf2.firebaseapp.com",
+	databaseURL: "https://project-prometheus-86bf2.firebaseio.com",
+	storageBucket: "project-prometheus-86bf2.appspot.com",
+	messagingSenderId: "1020022526116"
+};
+firebase.initializeApp(config);
+// Create a variable to reference the database.
+var database = firebase.database();
+var userLocation = "";
+var searchLocation = "";
+var userName = "";
+//=======================//
 //=======Methods=========//
 //=======================//
 //Initialize the Google Map at lat, long coords based on address
@@ -56,6 +72,16 @@ function findSearch(){
 		searchNumber =             ( $("#numRecords"+placeholder).val()   ? parseInt($("#numRecords"+placeholder).val())   : 10   );
 		searchRadius = "&radius" + ( $("#searchRadius"+placeholder).val() ? parseInt($("#searchRadius"+placeholder).val()) : 2000 );
 		finalQuery = foursquareQueryURL + searchLL + searchTerm + "&limit=" + searchNumber + searchRadius;
+		//firebase stuff
+		userLocation = $("#searchByAddress").val();
+		searchLocation = $("#sel"+placeholder).val();
+		database.ref("/users").push({
+			userName : userName,
+	        userLocation : userLocation,
+	        searchLocation : searchLocation,
+	        dataAdded: firebase.database.ServerValue.TIMESTAMP
+	      });
+
 		runQuery(searchNumber, finalQuery);
 		return false;
 	}
@@ -134,7 +160,10 @@ function storeTheZip(){
 	coords = geoLocator();
 	//initMap();
 }
-
+$("#nameInput").on("click", function(){
+	userName = $("#userName").val();
+	$("#putTheName").html("<p id='usersName'>Thanks for using our app, " + userName + "!</p>");
+});
 //On findZip click, run function storeTheZip
 $(document).on("click", "#findZip", storeTheZip);
 //On ourMission click, display the mission statement
@@ -192,3 +221,17 @@ function resultToDiv (item,itemNum) {
 	//Create a restaurant marker for each location retrieved
 	return newDiv;
 }
+database.ref().on("child_added"), function(childSnapshot){
+	console.log(childSnapshot.val().userName);
+	console.log(childSnapshot.val().searchLocation);
+	$("#theName").html(childSnapshot.val().userName);
+    $("#theLocation").html(childSnapshot.val().searchLocation);
+}
+database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(childSnapshot) {
+	console.log(childSnapshot.val());
+      // Change the HTML to reflect
+      $("#theName").html(childSnapshot.val().userName);
+      $("#theLocation").html(childSnapshot.val().searchLocation);
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+});
