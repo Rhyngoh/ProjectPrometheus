@@ -1,11 +1,3 @@
-/* Grabbing the user's location and putting it on google maps when they open the html page
-if (navigator.geolocation) {
-     navigator.geolocation.getCurrentPosition(function (position) {
-         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-         map.setCenter(initialLocation);
-     });
- }
- */
 //=======================//
 //=======Variables=======//
 //=======================//
@@ -13,7 +5,7 @@ if (navigator.geolocation) {
 var gMapsJSAPI = "AIzaSyB6doLPrG5Th0zwPgg4rqEC5H-_LW5JL5g";
 //Transit and Trails API key
 var tTrailsAPI = "41e73178218a6deff1d2b78b1b251085da804e04d528a0d6ad601f06db5bb14a";
-
+//Yelp API
 var yelpAPI = "c5rwaF5qpeOdsja0OFZNMA";
 //Zillow API/ZWSID
 var zillowAPI = "X1-ZWz19hcd8pk64r_5i268";
@@ -23,21 +15,21 @@ var foursquareSecret = "GY1LWAXZWEUOS1KNUQSHYSR4JQBV4XY4HH0PQN0ULMPTD5GH";
 var foursquareQueryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + foursquareClient + "&client_secret=" + foursquareSecret + "&v=20161117";
 //Initial Google Maps load
 var map;
-//Yelp variables
 var searchResults = "";
+//Default search number and radius if no user input
 var searchNumber = 10;
 var searchRadius = 1000;
 var zipCode = 78753;
-//var searchRating = 4;
 var searchCity = "";
 var locationCounter = 0;
 var lat = 0;
 var lng = 0;
+//placeholder variable for certain searches
+var placeholder;
 //=======================//
 //=======Methods=========//
 //=======================//
 //Initialize the Google Map at lat, long coords based on address
-
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: lat, lng: lng},
@@ -47,29 +39,52 @@ function initMap() {
 	var homeMarker = new google.maps.Marker({
           position: {lat: lat, lng: lng},
           map: map,
+          icon: "assets/images/bighouse.png",
           title: 'Home Search Address'
         });
 }
-
-//Find nearby locations search
-$("#findSearch").on("click", function(){
-	
+function findSearch(){
 	if(!zipCode)
 		return false;
 	else
 	{
+		//Run storeTheZip function to grab the lat/long using the geoLocator function
 		storeTheZip();
+		//Build the query to search for nearby locations
 		searchLL = "&ll=" + lat + "," + lng;
-		searchTerm = "&query=" + encodeURIComponent($("#sel1").val());
-		searchNumber =             ( $("#numRecords").val()   ? parseInt($("#numRecords").val())   : 10   );
-		searchRadius = "&radius" + ( $("#searchRadius").val() ? parseInt($("#searchRadius").val()) : 2000 );
+		searchTerm = "&query=" + encodeURIComponent($("#sel"+placeholder).val());
+		searchNumber =             ( $("#numRecords"+placeholder).val()   ? parseInt($("#numRecords"+placeholder).val())   : 10   );
+		searchRadius = "&radius" + ( $("#searchRadius"+placeholder).val() ? parseInt($("#searchRadius"+placeholder).val()) : 2000 );
 		finalQuery = foursquareQueryURL + searchLL + searchTerm + "&limit=" + searchNumber + searchRadius;
 		runQuery(searchNumber, finalQuery);
 		return false;
 	}
-
+}
+//Search for nearby restaurants
+$("#findSearchRestaurants").on("click", function(){
+	placeholder = 1;
+	findSearch();
 });
-
+//Search for nearby family locations
+$("#findSearchFamily").on("click", function(){
+	placeholder = 2;
+	findSearch();
+});
+//Search for nearby healthy location
+$("#findSearchHealthy").on("click", function(){
+	placeholder = 3;
+	findSearch();
+});
+//Search for nearby professional locations
+$("#findSearchPro").on("click", function(){
+	placeholder = 4;
+	findSearch();
+});
+//Search for nearby nightlife locations
+$("#findSearchNight").on("click", function(){
+	placeholder = 5;
+	findSearch();
+});
 //Run query to place markers that correspond with foursquare results
 //Show the foursquare results with name, address, and phone number
 function runQuery(searchNumber, queryURL){
@@ -87,6 +102,7 @@ function runQuery(searchNumber, queryURL){
 			var homeMarker = new google.maps.Marker({
 	          position: {lat: lat, lng: lng},
 	          map: map,
+	          icon: "assets/images/bighouse.png",
 	          title: 'Home Search Address'
 	        });
 			console.log(searchNumber);
@@ -102,7 +118,6 @@ function runQuery(searchNumber, queryURL){
 					position: new google.maps.LatLng(currentItem.location.lat, currentItem.location.lng),
 					map: map,
 					title: currentItem.name,
-					icon: "assets/images/restaurantmarker.png",
 					html: currentItem.name + "<br>" + currentItem.location.address + "<br>" + currentItem.contact.formattedPhone
 				});
 				//For dynamically created markers, create a popup window when user mouses over
@@ -117,6 +132,7 @@ function runQuery(searchNumber, queryURL){
 //storeTheZip stores the zip code value that the user inputs
 function storeTheZip(){
 	coords = geoLocator();
+	//initMap();
 }
 
 //On findZip click, run function storeTheZip
