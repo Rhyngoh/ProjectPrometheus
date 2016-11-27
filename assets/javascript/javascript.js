@@ -123,17 +123,8 @@ function runQuery(searchNumber, queryURL){
 			var infowindow = new google.maps.InfoWindow({content: "empty"});
 			var marker = null;
 			$("#foursquareResults").html("");
-			//Reset map to center on user address
-			map = new google.maps.Map(document.getElementById('map'), {
-			  center: {lat: lat, lng: lng},
-			  zoom: 15
-			});
-			var homeMarker = new google.maps.Marker({
-	          position: {lat: lat, lng: lng},
-	          map: map,
-	          icon: "assets/images/bighouse.png",
-	          title: 'Home Search Address'
-	        });
+			
+			
 			console.log(searchNumber);
 			//for loop to post foursquare results
 			for (var i = 0; i < searchNumber; i++){
@@ -197,6 +188,20 @@ function geoLocator(){
 		js_file.src = 'https://maps.googleapis.com/maps/api/js?callback=initMap&key=' + gMapsJSAPI;
 		if(!map)
 			document.getElementsByTagName('head')[0].appendChild(js_file);
+		else{
+			//Reset map to center on user address
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: lat, lng: lng},
+				zoom: 15
+			});
+			var homeMarker = new google.maps.Marker({
+	          position: {lat: lat, lng: lng},
+	          map: map,
+    	      icon: "assets/images/bighouse.png",
+        	  title: 'Home Search Address'
+        	});
+
+		}
 		return coords;
 	});
 }
