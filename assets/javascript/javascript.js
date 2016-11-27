@@ -39,6 +39,7 @@ var config = {
 firebase.initializeApp(config);
 // Create a variable to reference the database.
 var database = firebase.database();
+// Initial firebase values
 var userLocation = "";
 var searchLocation = "";
 var userName = "";
@@ -221,17 +222,22 @@ function resultToDiv (item,itemNum) {
 	//Create a restaurant marker for each location retrieved
 	return newDiv;
 }
-database.ref().on("child_added"), function(childSnapshot){
+database.ref("/users").on("child_added", function(childSnapshot){
+	console.log(childSnapshot.val());
 	console.log(childSnapshot.val().userName);
 	console.log(childSnapshot.val().searchLocation);
-	$("#theName").html(childSnapshot.val().userName);
-    $("#theLocation").html(childSnapshot.val().searchLocation);
-}
-database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(childSnapshot) {
-	console.log(childSnapshot.val());
-      // Change the HTML to reflect
-      $("#theName").html(childSnapshot.val().userName);
-      $("#theLocation").html(childSnapshot.val().searchLocation);
-    }, function(errorObject) {
-      console.log("Errors handled: " + errorObject.code);
+	//$("#theName").html("Last user: " + childSnapshot.val().users.userName);
+    //$("#theLocation").html("Last search: " + childSnapshot.val().users.searchLocation);
+}, function(errorObject){
+	console.log("Errors handled: " + errorObject.code);
 });
+database.ref("/users").orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+	console.log(snapshot.val());
+      // Change the HTML to reflect
+      if (snapshot.val().userName === ""){
+      	$("#theName").html("Last user: Anonymous");
+      } else{
+      	$("#theName").html("Last user: " + snapshot.val().userName);
+      }
+      $("#theLocation").html("Last search: " + snapshot.val().searchLocation);
+    });

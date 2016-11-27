@@ -31,6 +31,11 @@ h2 {
     text-align: center;
     color: black;
 }
+#lastUser{
+    font-weight: bold;
+    font-size: 18px;
+    
+}
 #mission {
     font-size: 30px;
     /*color: #fff;*/
