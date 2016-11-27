@@ -69,11 +69,13 @@ function findSearch(){
 		storeTheZip();
 		//Build the query to search for nearby locations
 		searchLL = "&ll=" + lat + "," + lng;
+		//Encode the selection to be placed in queryurl
 		searchTerm = "&query=" + encodeURIComponent($("#sel"+placeholder).val());
+		//Ternary operator: If $("#numRecords"+placeholder).val() is true, searchNumber = parseInt($("#numRecords+placeholder").val()), else searchNumber = 10;
 		searchNumber =             ( $("#numRecords"+placeholder).val()   ? parseInt($("#numRecords"+placeholder).val())   : 10   );
-		searchRadius = "&radius" + ( $("#searchRadius"+placeholder).val() ? parseInt($("#searchRadius"+placeholder).val()) : 2000 );
+		searchRadius = "&radius" + ( $("#searchRadius"+placeholder).val() ? parseInt($("#searchRadius"+placeholder).val()) : 1000 );
 		finalQuery = foursquareQueryURL + searchLL + searchTerm + "&limit=" + searchNumber + searchRadius;
-		//firebase stuff
+		//firebase stuff, store username, user location, search location(restaurant etc), and date added
 		userLocation = $("#searchByAddress").val();
 		searchLocation = $("#sel"+placeholder).val();
 		database.ref("/users").push({
@@ -222,6 +224,7 @@ function resultToDiv (item,itemNum) {
 	//Create a restaurant marker for each location retrieved
 	return newDiv;
 }
+/*
 database.ref("/users").on("child_added", function(childSnapshot){
 	console.log(childSnapshot.val());
 	console.log(childSnapshot.val().userName);
@@ -230,7 +233,7 @@ database.ref("/users").on("child_added", function(childSnapshot){
     //$("#theLocation").html("Last search: " + childSnapshot.val().users.searchLocation);
 }, function(errorObject){
 	console.log("Errors handled: " + errorObject.code);
-});
+});*/
 database.ref("/users").orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
 	console.log(snapshot.val());
       // Change the HTML to reflect
