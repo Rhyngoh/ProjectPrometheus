@@ -13,6 +13,7 @@ ___
 ## APIs Used
 * Foursquare API
 * Google Geolocator API
+
 ___
 ## Technologies Used
 * Ajax
