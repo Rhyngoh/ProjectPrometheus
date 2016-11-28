@@ -86,6 +86,11 @@ padding: 1rem 1rem 1rem 1rem;
 background : rgba(0, 0, 0, 0.3);
 }
 
+#addressPanel{
+    
+    margin-top: 1rem;
+}
+
 /*.panel-default > .panel-heading {
   background-color: #D4D2D8;
 }*/

@@ -174,7 +174,8 @@ function geoLocator(){
     var location = $("#searchByAddress").val().trim();
     var zipCode = $("#searchByZip").val().trim();
     var searchLocation = location ? zipCode ? location + "," + zipCode : location : zipCode; 
-    if(!searchLocation)
+    
+    if(!searchLocation || (zipCode && zipCode.length!=5))
     	{
     		$('#myModal').modal('show'); 
     		return;
@@ -192,7 +193,7 @@ function geoLocator(){
 		console.log(coords.lat+","+coords.lng);
 		lat = coords.lat;
 		lng = coords.lng;
-
+		$("#homeAddress").html(" The nearest match was: " + geoResponse.results[0].formatted_address);
 		var js_file = document.createElement('script');
 		js_file.type = 'text/javascript';
 		js_file.src = 'https://maps.googleapis.com/maps/api/js?callback=initMap&key=' + gMapsJSAPI;
