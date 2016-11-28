@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Lifestyle Mapper</title>
+	<title>Selective Living</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
@@ -18,29 +18,55 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+
+
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            <div id="lastUser">
-                <p id="theName">Last User: </p>
-                <p id="theLocation">Last Search: </p>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Input Error</h4>
+        </div>
+        <div class="modal-body">
+          <p>You did not enter a valid address or zip code. Try again? </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
+    <div id="headingRow">
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <div id="lastUser">
+                    <p id="theName">Last User: </p>
+                    <p id="theLocation">Last Search: </p>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <h2 align="center">Lifestyle Mapper</h2>
-        </div>
-        <div class="col-md-3">
-            <div id="putTheName">
-                <div class="input-group">
-                    <input type="text" id="userName" class="form-control" placeholder="What's your name?">
-                    <span class="input-group-btn">
-                        <button id="nameInput" class="btn btn-default" type="button">Enter</button>
-                    </span>
+            <div class="col-md-6 col-sm-6">
+                <h2 align="center">Selective Living</h2>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div id="putTheName">
+                    <div class="input-group">
+                        <input type="text" id="userName" class="form-control" placeholder="What's your name?">
+                        <span class="input-group-btn">
+                            <button id="nameInput" class="btn btn-default" type="button">Enter</button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="masterDiv">
         <div class="col-sm-3 col-md-3">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
@@ -399,17 +425,17 @@
             </div>
         </div>
         
-        <div class="col-md-9 col-sm-9">
+        <div class="col-md-8 col-sm-8">
             <div id="map"></div>
                 <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12 col-sm-12">
                         <div id="foursquareResults">
                     </div>
-                    <div class="col-md-1">
-                    </div>
+                
                 </div>
             </div>
         </div>
+        <div class="col-md-1 col-sm-1"></div>
     </div>
 </div>  
 <script src="assets/javascript/javascript.js"></script>

@@ -11,15 +11,26 @@ body {
     -o-background-size: cover;
     background-size: cover;
 }
+
+
+#masterDiv{
+
+    padding-top : 2rem;
+
+}
+
 #map{
     height: 600px;
-    width: 1000px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
     frameborder: 0;
     border:0;
+    padding-bottom: 2em;
 }
 h2 {
     font-size: 70px;
-    color: #A7CFE3;
+    color: #CEE8FF;
     /*color: #fff;*/
     font: solid bold;
     font-family: 'Oleo Script Swash Caps', cursive;
@@ -29,51 +40,62 @@ h2 {
     font-weight: bold;
     font-size: 18px;
     text-align: center;
-    color: black;
+    color: white;
 }
 #lastUser{
     font-weight: bold;
     font-size: 18px;
+    color: #ddd;
     
 }
 #mission {
-    font-size: 30px;
+    font-size: calc(1rem + 1.3vw);
     /*color: #fff;*/
     border: black;
     font: solid bold;
     font-family: 'Oleo Script Swash Caps', cursive;
     text-align: center;
-    padding: 25px 50px 0 525px ;
+    padding: 25px 50px 0 30vw ;
     height: 600px;
     frameborder: 0;
     border: 0;
     /*color: #3498DB;*/
     color: #A7CFE3;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background : rgba(0, 0, 0, 0.5);
 }
 #foursquareResults{
+    padding-top: 2rem;
     color: white;
 }
 .foursqSearch{
     background: #4B56AA; 
-    background: -webkit-linear-gradient(left top, #4B56AA, #02CC8F); 
-    background: -o-linear-gradient(bottom right, #4B56AA, #02CC8F); 
-    background: -moz-linear-gradient(bottom right, #4B56AA, #02CC8F); 
-    background: linear-gradient(to bottom right, #4B56AA, #02CC8F);
+    background: -webkit-linear-gradient(left top, #4B56AA, #CEE8FF); 
+    background: -o-linear-gradient(bottom right, #4B56AA, #CEE8FF); 
+    background: -moz-linear-gradient(bottom right, #4B56AA, #CEE8FF); 
+    background: linear-gradient(to bottom right, #4B56AA, #CEE8FF);
 }
 .foursqSearch a{
     color:white;
 }
+
+#headingRow{
+
+margin: 1rem 0rem 1rem 0rem;
+padding: 1rem 1rem 1rem 1rem;
+background : rgba(0, 0, 0, 0.3);
+}
+
+/*.panel-default > .panel-heading {
+  background-color: #D4D2D8;
+}*/
+
+
 /* Rules for screen widths at 768px or lower */
 @media screen and (max-width: 768px) {
 
     body {
         background-color: #333;
-    }
-
-    .container {
-        width: ;
-
     }
 
     .wrapper {
@@ -100,3 +122,5 @@ h2 {
     .wrapper {
         width:800;
     }   
+
+

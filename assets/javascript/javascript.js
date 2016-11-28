@@ -161,15 +161,27 @@ $("#nameInput").on("click", function(){
 //On findZip click, run function storeTheZip
 $(document).on("click", "#findZip", storeTheZip);
 //On ourMission click, display the mission statement
+
+$(document).ready(function(){
+	$("#map").html("<p id='mission'>Our mission is to provide the simplest home search for the type of lifestyle you want to lead. Whether you are a fitness minded person who wants to be surrounded with healthy choices or a family that wants the best education for their children, this website has it all. We want to make the process of finding that perfect location, the perfect home and the process of buying easy for you! Let our family help your family find the perfect home!</p>");
+	$("#map").css({"background": "url('assets/images/fancypoolv3.jpg') no-repeat fixed center"});
+});
+
 $("#ourMission").on("click", function(){
 	$("#map").html("<p id='mission'>Our mission is to provide the simplest home search for the type of lifestyle you want to lead. Whether you are a fitness minded person who wants to be surrounded with healthy choices or a family that wants the best education for their children, this website has it all. We want to make the process of finding that perfect location, the perfect home and the process of buying easy for you! Let our family help your family find the perfect home!</p>");
-	$("#map").css({"background": "url('assets/images/pool1.jpg') no-repeat fixed center"});
+	$("#map").css({"background": "url('assets/images/fancypoolv3.jpg') no-repeat fixed center"});
 });
 //geoLocator stores the user address input and adds it to google geocode
 function geoLocator(){
     var location = $("#searchByAddress").val().trim();
     var zipCode = $("#searchByZip").val().trim();
     var searchLocation = location ? zipCode ? location + "," + zipCode : location : zipCode; 
+    if(!searchLocation)
+    	{
+    		$('#myModal').modal('show'); 
+    		return;
+    	}
+
     console.log("loc: "+ searchLocation);
 	var queryGeoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+searchLocation+"&key=" + gMapsJSAPI;
 	console.log(queryGeoURL);
@@ -210,23 +222,26 @@ function resultToDiv (item,itemNum) {
 
 	newDiv = $("<div>");
 	newDiv.addClass("foursqSearch");
+	newDiv.addClass("panel panel-info");
 	//If there is a venue name, append it to the foursqSearch
 	if(item.name != "null"){
-		newDiv.append("<h3><span class='label label-primary'>" + itemNum + "</span><strong>" + item.name + '</strong></h3>');
+		newDiv.append("<div class=\"panel-heading\"><h4 class=\"panel-title\"><span class='label label-primary'>" + itemNum + "</span><strong> " + item.name + '</strong></h4></div>' );
 	}
 	//If there is a venue address, append it to the foursqSearch
+	panelBodyDiv = $("<div class=\"panel-body\">");
 	if(item.location.address){
-		newDiv.append("<h4>" + item.location.address + "</h4>");
+		panelBodyDiv.append("<h4>" + item.location.address + "</h4>");
 	}
 	//If there is a venue phone number, append it to the foursqSearch
 	if(item.contact.formattedPhone){
-		newDiv.append("<h5>" + item.contact.formattedPhone + "</h5>");
+		panelBodyDiv.append("<h5>" + item.contact.formattedPhone + "</h5>");
 	}
 	//If there is a venue website, append it to the foursqSearch
 	if(item.url){
-		newDiv.append( "<h5><a href=\"" + item.url + "\">" + item.url + "</a></h5>");
+		panelBodyDiv.append( "<h5><a href=\"" + item.url + "\">" + item.url + "</a></h5>");
 	}
 	//Create a restaurant marker for each location retrieved
+	newDiv.append(panelBodyDiv);
 	return newDiv;
 }
 /*
