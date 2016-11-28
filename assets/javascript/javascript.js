@@ -3,12 +3,12 @@
 //=======================//
 //Google Maps Javascript API key
 var gMapsJSAPI = "AIzaSyB6doLPrG5Th0zwPgg4rqEC5H-_LW5JL5g";
-//Transit and Trails API key
-var tTrailsAPI = "41e73178218a6deff1d2b78b1b251085da804e04d528a0d6ad601f06db5bb14a";
-//Yelp API
-var yelpAPI = "c5rwaF5qpeOdsja0OFZNMA";
-//Zillow API/ZWSID
-var zillowAPI = "X1-ZWz19hcd8pk64r_5i268";
+//Transit and Trails API key UNUSED
+//var tTrailsAPI = "41e73178218a6deff1d2b78b1b251085da804e04d528a0d6ad601f06db5bb14a";
+//Yelp API UNUSED
+//var yelpAPI = "c5rwaF5qpeOdsja0OFZNMA";
+//Zillow API/ZWSID UNUSED
+//var zillowAPI = "X1-ZWz19hcd8pk64r_5i268";
 //foursquare client id
 var foursquareClient = "Z52OIOVPKTHUNPPYWRTVYA0BKBA30MD1PNQ1AG2QAKVI4JIB";
 var foursquareSecret = "GY1LWAXZWEUOS1KNUQSHYSR4JQBV4XY4HH0PQN0ULMPTD5GH";
@@ -124,7 +124,6 @@ function runQuery(searchNumber, queryURL){
 			var marker = null;
 			$("#foursquareResults").html("");
 			
-			
 			console.log(searchNumber);
 			//for loop to post foursquare results
 			for (var i = 0; i < searchNumber; i++){
@@ -152,7 +151,6 @@ function runQuery(searchNumber, queryURL){
 //storeTheZip stores the zip code value that the user inputs
 function storeTheZip(){
 	coords = geoLocator();
-	//initMap();
 }
 $("#nameInput").on("click", function(){
 	userName = $("#userName").val();
@@ -205,7 +203,6 @@ function geoLocator(){
 		return coords;
 	});
 }
-
 function resultToDiv (item,itemNum) {
 
 	newDiv = $("<div>");
@@ -229,16 +226,6 @@ function resultToDiv (item,itemNum) {
 	//Create a restaurant marker for each location retrieved
 	return newDiv;
 }
-/*
-database.ref("/users").on("child_added", function(childSnapshot){
-	console.log(childSnapshot.val());
-	console.log(childSnapshot.val().userName);
-	console.log(childSnapshot.val().searchLocation);
-	//$("#theName").html("Last user: " + childSnapshot.val().users.userName);
-    //$("#theLocation").html("Last search: " + childSnapshot.val().users.searchLocation);
-}, function(errorObject){
-	console.log("Errors handled: " + errorObject.code);
-});*/
 database.ref("/users").orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
 	console.log(snapshot.val());
       // Change the HTML to reflect
